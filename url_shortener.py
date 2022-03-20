@@ -52,7 +52,7 @@ def shorten_url(update: Update, context: CallbackContext) -> int:
     url = urllib.parse.quote(update.message.text)
     chat_id = update.message.chat_id
     r = requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(key, url))
-    if r.json()['url']['status'] is not 7:
+    if r.json()['url']['status'] != 7:
         update.message.reply_text("Please enter a valid URL")
     else:
         shortened_link = r.json()['url']['shortLink']
